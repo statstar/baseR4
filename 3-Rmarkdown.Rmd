@@ -1,0 +1,166 @@
+---
+title: "Rmarkdown"
+author: "Sanghoo Yoon"
+date: '2021 2 25 '
+output: 
+  html_document: 
+    highlight: textmate
+    theme: cosmo
+    toc: yes
+    toc_depth: 2
+---
+
+# R markdown 시작하기
+
+1. R markdown을 작성하기 위해서는 일반 R script가 아닌 .Rmd script창을 열어야한다.
+
+
+Rstudio 메뉴창의 file아래 새파일추가 버튼을 클릭하면 R script아래 R markdown을 열어주면 된다. 작성하고자 하는 주제와 저자이름 그리고 문서형식을 선택하고 ok버튼을 누르면 .Rmd script창이 생성된다.
+
+
+
+2. R markdown 문법에 맞게 문서를 작성하면 된다. 작성한 문서를 HTML파일로 변환하기 위해서는 .Rmd창 아래 Knit 버튼을 클릭하면 문서가 생성된다.
+
+# Basic Syntax
+
+## 1. 강조(Empasis)
+
+글자를 강조하기 위해서 기본적으로 italic과 bold체가 있다.
+
+italic은 강조하고자 하는 text 양끝에 `*` 또는`_`를 입력하면 되고,
+
+bold는 강조하고자 하는 text 양끝에 `**` 또는 `__`를 입력하면 된다.
+
+아래 문장에서 R 초급은 italic으로 통계분석은 bold 표현해보자.
+
+
+통계교육원 R 초급 통계분석
+
+통계교육원 *R 초급* **통계분석**
+
+
+## 2. Header(머릿글)
+
+Heder는 머릿글로 `#`의 갯수에 따라 크기가 조정된다.
+
+주의 # 다음에 사용하는 단어는 띄어 쓰기 해야한다.
+
+# R markdown
+## R markdown
+### R markdown
+#### R markdown
+##### R markdown
+
+## 3. Inline R code(글자 강조)
+
+글자를 사용하는 중간에 간단한 계산이 필요하면 
+
+'r' (Tab 키 위의 문자) 안에 계산식을 넣어보자.
+
+예를 들어 $\pi$ 값을 입력하려면 'r pi'를 입력해보자. `r pi`
+
+로그함수, 지수함수도 사용가능하며 chuck로 저장된 r 객체 값도 출력할 수 있다.
+
+## 4. Blackquotes (인용)
+
+어떤 문장을 강조하여 블록으로 지정하고자 하면 ``>`` 기호 다음에 문장을 넣어보자.
+
+> 너 자신을 누구에겐가 필요한 존재로 만들어라.
+
+> 노력을 이기는 재능은 없고 노력을 외면하는 결과도 없다.
+
+
+## 5. Plain blocks
+
+핵심내용을 강조하고자 하면 Plain block을 사용해보자.
+
+'''
+
+여기 사이의 글은 상자로 묶여 표시된다.
+
+'''
+
+```
+여기 사이의 글은 상자로 묶여 표시된다.
+```
+
+## 6. Inline code
+
+글자를 블록 처리하기 위해선 '' 사이에 문자를 넣어보자.
+
+예를 들어 '통계교육원' 교육장4 는 `통계교육원` 교육장4로 표시된다.
+
+## 7. Manual Line Break
+
+마크다운에서 다음 줄로 넘기기 위해서는 넘기려는 글 다음에 엔터를 두번 치자.
+
+Tab으로 들여넣기 한 후 *  또는 -로 글을 시작하면 들여넣기 된 글을 적을 수 있다.
+
+통계교육원
+
+  * R 초급 통계분석
+  
+    - 강사 : 대구대학교 수리빅데이터학부
+    
+      * 윤상후
+      
+## 8. Basic R console 
+
+기존 R script에서 code를 입력했을 때, 콘솔창에 뿌려지는 code 결과를 문서에 나타나게 하기위해서
+
+R code chunk 안에 R code를 입력해야 한다. chunk는 .cmd 스크립트창의 오른쪽 상단의 Chunks를
+
+클릭하여 “Insert chunks”를 선택하거나 그냥 스크립트창에 직접 입력해도 된다.
+
+'''{r}
+
+plot(dist~speed, data=cars)
+
+'''
+
+```{r}
+plot(dist~speed, data=cars)
+```
+
+HTML 출력결과 코드와 df 결과가 문서에 나타날 것이다.
+{r} 안에 많은 chunk 옵션들이 있다. chunk 옵션은 {}안에 커서를 넣고 Tab키를 눌러 확인할 수 있다.
+
+다음 옵션들이 주로 많이 사용된다.
+
+* echo : R 코드를 출력 시킬지 결정한다(T,F)
+
+* eval : R 코드를 실핼 시킬지 결정한다(T,F)
+
+* message : 팩키지를 불러오면서 출력되는 메세지를 없앤다.(T,F)
+
+* warning : 경고메세지를 생략한다(T,F)
+
+## 9. Create Markdown table
+
+Rmarkdown에서는 간단한 |와 -를 이용해서 아래와 같은 표를 만들 수 있다.
+
+x| 	y|  z
+--:|:---:|--:
+1 |	0.59| 가나다
+2 |	2.29| 라마바
+3 |	1.14| 사아자
+
+만약 R 프로그램 안에 있는 데이터를 표로 만들고자 하면 kable()함수를 사용하자.
+
+```{r, message=F, warning=F}
+library(knitr)
+kable(head(cars))
+```
+
+## 10. equation(수식)
+
+Rmarkdown에서 수식은 Latex와 동일하다.
+$ 사이에 수식을 넣어주면 된다.
+
+$ {{1} \over {3 \log_4(5^2)}} \times \epsilon_i + \beta_0 $
+
+## 11. Hyperlink & load image
+
+수업시간에 자세히 안내내
+
+
